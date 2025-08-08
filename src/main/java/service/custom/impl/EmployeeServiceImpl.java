@@ -6,12 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import model.Employee;
 import model.ID;
+import model.Password;
 import repository.DaoFactory;
 import repository.custom.EmployeeDao;
 import service.custom.EmployeeService;
 import util.DaoType;
 import org.modelmapper.*;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.TreeSet;
 
@@ -29,6 +31,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean addEmployee(Employee employee) {
         try{
+
+            //password
+            String p=Password.toHexString(Password.getSHA(employee.getPassword()));
+            employee.setPassword(p);
+            System.out.println(p);
+            System.out.println(Password.toHexString(Password.getSHA(employee.getPassword())));
             String id=getID();
             System.out.println(id);
             EmployeeEntity entity=new ModelMapper().map(employee,EmployeeEntity.class);
@@ -43,6 +51,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean editEmployee(Employee employee) {
+        try {
+            employee.setPassword(Password.toHexString(Password.getSHA(employee.getPassword())));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
         try{
             EmployeeEntity entity=dao.search(employee.getId());
 
@@ -80,6 +93,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         ObservableList<Employee> employees= FXCollections.observableArrayList();
         for (EmployeeEntity entity:dao.findAll()){
             if(entity!=null){
+
                 employees.add(new ModelMapper().map(entity, Employee.class));
             }
         }
@@ -88,6 +102,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean login(String email, String password) {
+//        try {
+//            password=Password.toHexString(Password.getSHA(password));
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException(e);
+//        }
         return email.isEmpty()||password.isEmpty()?false:dao.login(email,password);
     }
     @Override

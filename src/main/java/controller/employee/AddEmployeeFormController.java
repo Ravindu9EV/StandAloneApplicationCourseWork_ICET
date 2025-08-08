@@ -9,11 +9,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Employee;
+import model.Password;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
 import util.ServiceType;
 
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 public class AddEmployeeFormController implements Initializable {
@@ -56,6 +58,7 @@ public class AddEmployeeFormController implements Initializable {
     @FXML
     private JFXTextField txtPassword;
 
+
     private final EmployeeService service= ServiceFactory.getInstance().getService(ServiceType.EMPLOYEE);
     @FXML
     void btnAddEmpOnAction(ActionEvent event) {
@@ -89,7 +92,8 @@ public class AddEmployeeFormController implements Initializable {
     @FXML
     void btnEditEmpOnAction(ActionEvent event) {
             Employee employee=getEmployee();
-            if(employee!=null){
+
+        if(employee!=null){
 
                 if(service.editEmployee(employee)){
     loadTable();

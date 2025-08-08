@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.AddCustomerFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustomerFormController">
+   <children>
+      <JFXTextField fx:id="txtId" layoutX="43.0" layoutY="138.0" />
+      <JFXTextField fx:id="txtName" layoutX="200.0" layoutY="139.0" promptText="Name" />
+      <JFXTextField fx:id="txtEmail" layoutX="43.0" layoutY="197.0" promptText="Email" />
+      <JFXTextField fx:id="txtLocation" layoutX="200.0" layoutY="252.0" promptText="Location" />
+      <JFXTextField fx:id="txtContact" layoutX="43.0" layoutY="252.0" promptText="Contact" />
+      <Separator layoutX="348.0" layoutY="98.0" orientation="VERTICAL" prefHeight="298.0" prefWidth="0.0" />
+      <AnchorPane layoutX="11.0" layoutY="10.0" prefHeight="70.0" prefWidth="885.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #38a951 0.0%, #032b0b 100.0%);">
+         <children>
+            <Label layoutX="340.0" layoutY="17.0" text="Manage Customers">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9023001790046692" green="0.9263157844543457" blue="0.9075035452842712" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.03836257383227348" green="0.8631578683853149" blue="0.18957504630088806" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tblEmployees" layoutX="362.0" layoutY="131.0" prefHeight="200.0" prefWidth="432.0">
+         <columns>
+            <TableColumn fx:id="colID" prefWidth="77.5999755859375" text="ID" />
+            <TableColumn fx:id="colName" prefWidth="83.99993896484375" text="Name" />
+            <TableColumn fx:id="colEmail" prefWidth="81.60003662109375" text="Email" />
+            <TableColumn fx:id="colContact" prefWidth="86.39996337890625" text="Contact" />
+            <TableColumn fx:id="colLocation" prefWidth="98.39990234375" text="Location" />
+         </columns>
+      </TableView>
+      <JFXButton layoutX="159.0" layoutY="297.0" onAction="#btnAddEmpOnAction" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #d1c8c4 0.0%, #783d23 99.7308%, #783d23 100.0%);" text="Add" textFill="#131313" />
+      <JFXButton layoutX="49.0" layoutY="354.0" onAction="#btnEditEmpOnAction" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #e6ece7 0.0%, #7870ff 100.0%);" text="Edit" textFill="#2e2e2e" />
+      <JFXButton layoutX="111.0" layoutY="354.0" onAction="#btnDeleteEmpOnAction" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #edf2ee 0.0%, #c90b0b 99.7308%, #c90b0b 100.0%);" text="Delete" textFill="#0d0d0d" />
+      <JFXButton layoutX="197.0" layoutY="354.0" onAction="#btnSearchEmpOnAction" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #dbefdf 0.0%, #0b38de 100.0%);" text="Search" />
+   </children>
 </AnchorPane>

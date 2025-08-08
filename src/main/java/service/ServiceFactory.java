@@ -1,10 +1,8 @@
 package service;
 
 import service.custom.CustomerService;
-import service.custom.impl.AdminServiceImpl;
-import service.custom.impl.CustomerServiceImpl;
-import service.custom.impl.EmployeeServiceImpl;
-import service.custom.impl.ItemServiceImpl;
+import service.custom.SupplierService;
+import service.custom.impl.*;
 import util.ServiceType;
 
 public class ServiceFactory {
@@ -18,9 +16,10 @@ public class ServiceFactory {
     public <T extends SuperService>T getService(ServiceType type){
         switch (type){
             case ADMIN:return (T) new AdminServiceImpl();
-            case CUSTOMER:return (T) new CustomerServiceImpl();
-            case ITEM:return (T) new ItemServiceImpl();
+            case CUSTOMER:return (T) CustomerServiceImpl.getInstance();
+            case ITEM:return (T) ItemServiceImpl.getInstance();
             case EMPLOYEE:return (T) EmployeeServiceImpl.getInstance();
+            case SUPPLIER:return (T) SupplierServiceImpl.getInstance();
         }
         return null;
     }

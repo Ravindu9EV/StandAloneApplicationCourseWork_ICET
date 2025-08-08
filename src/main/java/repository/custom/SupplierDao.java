@@ -1,10 +1,9 @@
 package repository.custom;
 
-import entity.CustomerEntity;
 import repository.CrudRepository;
 
 import java.util.List;
 
-public interface CustomerDao extends CrudRepository<CustomerEntity> {
+public interface SupplierDao extends CrudRepository {
     List<String> getIDs();
 }

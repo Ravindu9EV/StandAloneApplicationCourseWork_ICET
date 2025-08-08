@@ -1,31 +1,19 @@
-package entity;
+package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Set;
-
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
-public class EmployeeEntity {
-    @Id
+public class Admin {
     private String id;
     private String name;
     private String location;
     private String email;
     private String password;
     private String contact;
-
-    @OneToMany(mappedBy = "employeeEntity")
-    private Set<SupplierEntity> supplierEntities;
-
 }

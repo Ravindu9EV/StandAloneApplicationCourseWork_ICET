@@ -31,20 +31,27 @@ public class LoginFormController {
 
                 //check for admin login
                 if (radioBtnAdmin.isSelected()) {
-                   // AdminServiceImpl service = ServiceFactory.getInstance().getService(ServiceType.ADMIN);
-                    //boolean b = service.login(txtEmail.getText(), txtPassword.getText());
-                    //System.out.println(b);
-                    //if (b) {
+                    AdminServiceImpl service = ServiceFactory.getInstance().getService(ServiceType.ADMIN);
+                    boolean b = service.login(txtEmail.getText(), txtPassword.getText());
+                    System.out.println(b);
+                    if (b) {
                         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/admin_dashboard.fxml"))));
                         stage.show();
-                    //}
+                    }
                } else {
                     //check for employee login
-                    EmployeeService service = ServiceFactory.getInstance().getService(ServiceType.ADMIN);
+                    EmployeeService service = ServiceFactory.getInstance().getService(ServiceType.EMPLOYEE);
                     if (service.login(txtEmail.getText(), txtPassword.getText())) {
                         try {
                             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/employee_dashboard.fxml"))));
                             stage.show();
+
+                            service.getAll().forEach(employee -> {
+                                if (employee.getEmail().equals(txtEmail.getText())){
+                                    AddSupplierFormController.empID=employee.getId();
+
+                                }
+                            });
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
